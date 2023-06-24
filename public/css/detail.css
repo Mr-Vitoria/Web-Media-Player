@@ -1,0 +1,67 @@
+.blackout{
+    position: fixed;
+    z-index: -1;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.imgFull{
+    position: fixed;
+    z-index: -2;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: blur(15px);
+}
+
+.container{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+
+.icon a{
+     color: black;
+ }
+.icon
+{
+    font-size: 2.5em;
+    position: absolute;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+.content .head{
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.content .text{
+    font-size: 1.3em;
+}
+
+.imgCont{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.imgCont img{
+    width: 400px;
+    height: 400px;
+    margin: 60px 40px;
+    border: 10px solid white ;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.h1{
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+}
