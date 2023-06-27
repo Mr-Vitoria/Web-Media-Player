@@ -8,7 +8,7 @@
     @else
     
     @if (count($musicByName)>0)
-    <h1 class="headerH">Найдено совпадение в названиее: <span>{{$searchText}}</span></h1>
+    <h1 class="headerH">Найдено совпадение в названии: <span>{{$searchText}}</span></h1>
     <div class="musics">
 
         @foreach ($musicByName as $music)

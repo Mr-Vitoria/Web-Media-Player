@@ -65,10 +65,3 @@ function toggleSound () {
 
 soundButton.addEventListener('click', toggleSound);
 }
-
-
-
-document.querySelector('.sidebar-open').addEventListener('click', () => {
-  document.querySelector('.sidebar').classList.toggle('active');
-  document.querySelector('.sidebar-main').classList.toggle('active-main');
-})

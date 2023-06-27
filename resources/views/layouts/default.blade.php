@@ -14,6 +14,8 @@
    <footer class="row">
        @include('includes.footer')
    </footer>
+
+    <div class="backImg"></div>
 </div>
 </body>
 </html>

@@ -1,24 +1,26 @@
-<div class="sidebar active">
-    <div class="sidebar-main active-main">
-        <div class="sidebar-open ">
-            <a href="#" class="fa-solid fa-bars"></a>
-        </div>
-        <div class="content">
-            <h3 class="headerH">Search music:</h3>
-            <div id="cover">
-                <form method="get" action="/search">
-                    <div class="tb">
-                        <div class="td"><input type="text" placeholder="Search" name="text" required></div>
-                        <div class="td" id="s-cover">
-                            <button type="submit" name="btnSearch">
-                                <div id="s-circle"></div>
-                                <span></span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <a class="btn btn-purple" href="/addMusic">Add new music</a>
-        </div>
+
+<div class="header">
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="/images/OuTouch.png"/>
+        </a>
+        <div class="collapse navbar-collapse"
+            id="navcol-1">
+            <ul class="nav navbar-nav">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Главная</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/addMusic">Добавить песню</a></li>
+                
+            </ul>
+            <form class="form-inline mr-auto" target="_self" method="get" action="/search">
+                <div class="form-group">
+                    <label for="search-field">
+                        <i class="fa fa-search text-white"></i>
+                    </label>
+                    <input class="form-control search-field" type="search" id="search-field" name="text">
+                </div>
+            </form>
+            <span class="navbar-text">
     </div>
+</nav>
 </div>
