@@ -21,6 +21,8 @@
     margin-top: 40px;
     display: grid;
     grid-template-columns: 2fr 3fr;
+    max-width: none;
+    width: 85%;
 }
 
 .icon a{
@@ -64,4 +66,9 @@
     font-size: 3em;
     margin: 0;
     padding: 0;
+}
+
+
+.icon i{
+    color: white !important;
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Music extends Model
 {
-    protected $primaryKry = 'id';
+    protected $primaryKey = 'id';
     protected $table = 'musics';
     protected $filable = ['year','name','text','author','duration','imagepath','musicpath'];
 

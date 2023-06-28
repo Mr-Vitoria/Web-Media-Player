@@ -1,0 +1,181 @@
+.loginSection,
+.profileSection {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    padding: 20px;
+    min-height:80vh;
+    background-color: #3d3d3de0;
+    padding: 20px;
+    border-radius: 31px;
+    box-shadow: 0 0 35px gray;
+}
+
+
+    .loginSection h2 {
+        color: white;
+        font-size: 4em;
+        margin-bottom: 20px;
+    }
+
+    .loginSection form {
+        display: flex;
+        flex-direction: column;
+        color: white;
+        font-size: 1.5em;
+        margin: 0;
+        align-items: center;
+    }
+
+        .loginSection form input,
+        .modal input {
+            border: 2px solid black;
+            background-color: transparent;
+            padding: 20px;
+            height: 60px;
+            width: 750px;
+            color: black;
+        }
+.modal input {
+    width:100%;
+    color: white;
+}
+
+.loginSection form label {
+    margin: 10px 0;
+    width: 100%;
+    text-align: left;
+}
+
+.loginSection form a {
+    color: white !important;
+    transition-duration: 100ms;
+}
+.loginSection form a:hover {
+    color: gray !important;
+    transition-duration: 100ms;
+}
+
+        .loginSection form button {    
+            border-radius: 20px;
+            transition-duration: 200ms;
+            color: white;
+            background-color: transparent;
+            width: 75%;
+            margin: auto;
+            padding: 10px 0;
+            margin-top: 70px;
+            font-size: 1.7em;
+        }
+
+            .loginSection form button:hover {
+                background-color: #5a5a5a;
+            }
+
+    .loginSection .helpBlock {
+        margin-top: 20px;
+        font-size: 0.9em;
+    }
+
+
+
+
+
+
+
+.profileSection {
+    margin-top: 0;
+    padding: 40px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+    .profileSection h2 {
+        font-size: 4em;
+        margin-bottom: 35px;
+    }
+
+    .profileSection .imgContainer {
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 100%;
+    }
+
+.imgContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profileSection label {
+    text-align: left;
+    width: 730px;
+    font-size: 1.4em;
+}
+
+.profileSection p {
+    border: 2px solid black;
+    background-color: transparent;
+    padding: 15px 20px;
+    width: 750px;
+    font-size: 1.3em;
+}
+
+.profileSection button,
+.profileSection a {
+    background-color: transparent;
+    border: 2px solid black;
+    margin: 10px 0;
+    font-size: 2.5em;
+    padding: 15px 40px;
+    width: fit-content;
+    color: white !important;
+}
+
+
+@media (max-width:850px){
+    .loginSection {
+        width: 100%;
+        padding: 40px;
+    }
+        .loginSection form input,
+        .modal input {
+            width: 100%;
+        }
+    .loginSection form button {
+        font-size: 0.8em;
+    }
+    .profileSection p,
+    .profileSection label {
+        width: 400px;
+    }
+}
+
+
+
+.modal-content {
+    background-color: #5a5a5a;
+}
+.modal-content form {
+    margin: 0;
+    height: fit-content;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: space-between;
+}
+.modal-footer button{
+    padding: 17px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.5em;
+}
+.modal-footer button:hover{
+    color: gray;
+}
