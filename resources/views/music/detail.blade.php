@@ -11,7 +11,10 @@
 <div class="container">
   <div class="imgCont">
     <div class="icon">
-      <a href="/index.php"><i class="fa-solid fa-arrow-left"></i></a>
+      <a href="/">
+        {{-- <i class="fa-solid fa-arrow-left"></i> --}}
+        <i class="bi bi-arrow-left"></i>
+      </a>
     </div>
     <img src="{{Storage::url($music->imagepath)}}">
     <div class="audio-player">

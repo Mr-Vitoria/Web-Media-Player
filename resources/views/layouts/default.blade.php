@@ -5,6 +5,9 @@
 </head>
 <body>
 <div>
+    @isset($message)
+        @include('includes.error')
+    @endisset    
    <header class="row">
        @include('includes.header')
    </header>

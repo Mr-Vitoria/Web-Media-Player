@@ -67,3 +67,8 @@
     margin: 0;
     padding: 0;
 }
+
+
+.icon i{
+    color: white !important;
+}

@@ -20,7 +20,18 @@
                     <input class="form-control search-field" type="search" id="search-field" name="text">
                 </div>
             </form>
-            <span class="navbar-text">
+            <span class="navbar-text"></span>
+
+            <div class="profileContainer">
+                @if(empty($profileImg))
+                    <a href="/registrate">Войти в профиль</a>
+                @else
+                    <a href="/profile">
+                        <img class="profileIcon" src='{{Storage::url($profileImg) }}'/>
+                    </a>
+                @endif
+            </div>
+        </div>
     </div>
 </nav>
 </div>

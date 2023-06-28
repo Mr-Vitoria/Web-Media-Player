@@ -31,14 +31,22 @@
 
         <div class="icons">
             <div class="icon">
-                <a href="/deleteMusic/{{ $music->id }}"><i class="fa-solid fa-xmark"></i></a>
+                <a href="/deleteMusic/{{ $music->id }}">
+                    {{-- <i class="fa-solid fa-xmark"></i> --}}
+                    <i class="bi bi-x-lg"></i>
+                </a>
             </div>
             <div class="icon">
-                <a href="/editMusic/{{ $music->id }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="/editMusic/{{ $music->id }}">
+                    {{-- <i class="fa-solid fa-pen-to-square"></i> --}}
+                    <i class="bi bi-pencil-square"></i>
+                </a>
             </div>
             <div class="icon">
-                <a href="detail/{{ $music->id }}"><i
-                        class="fa-solid fa-up-right-and-down-left-from-center"></i></a>
+                <a href="detail/{{ $music->id }}">
+                    {{-- <i class="fa-solid fa-up-right-and-down-left-from-center"></i> --}}
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </a>
             </div>
         </div>
     </div>

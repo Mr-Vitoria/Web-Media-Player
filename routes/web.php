@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MusicController;
 
@@ -28,3 +29,14 @@ Route::get('/search', [MusicController::class, 'searchMusic']);
 
 Route::get('/editMusic/{musicId}', [MusicController::class, 'editMusicPage']);
 Route::post('/editMusic', [MusicController::class, 'editMusic']);
+
+
+Route::get('/registrate', [UserController::class, 'registratePage']);
+Route::post('/registrate', [UserController::class, 'registrate']);
+
+Route::get('/profile', [UserController::class, 'profile']);
+Route::post('/changeUserImage', [UserController::class, 'changeUserImage']);
+Route::get('/signOut', [UserController::class, 'signOut']);
+
+Route::get('/login', [UserController::class, 'loginPage']);
+Route::post('/login', [UserController::class, 'login']);
