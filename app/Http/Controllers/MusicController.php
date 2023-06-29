@@ -12,12 +12,12 @@ class MusicController extends Controller
     public function index(Request $request)
     {
         $arrayToSend = array();
-        $arrayToSend['musics'] = DB::table('musics')->get();
         $userId = $request->cookie('id');
-        if(!is_null($userId)){
-            $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
+        if(is_null($userId)){
+            return redirect('login');    
         }
-
+        $arrayToSend['musics'] = DB::table('musics')->where('userId','=',$userId)->get();
+        $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
         return view('music/index', 
         $arrayToSend
     );
@@ -27,17 +27,19 @@ class MusicController extends Controller
         $arrayToSend = array();
         $arrayToSend['music'] = DB::table('musics')->find($musicId);
         $userId = $request->cookie('id');
-        if(!is_null($userId)){
-            $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
+        if(is_null($userId)){
+            return redirect('login');    
         }
+        $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
 
         return view('music\detail', 
         $arrayToSend);
     }
     public function addMusic(Request $request){
 
-        $pathMusic = $request->file('musicFile')->storeAs('musics', $request->musicFile->getClientOriginalName(), 'public');
-        $pathImage = $request->file('imageFile')->storeAs('images', $request->imageFile->getClientOriginalName(), 'public');
+        $loginUser = DB::table('users')->find($request->cookie('id'))->login;
+        $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, $request->musicFile->getClientOriginalName(), 'public');
+        $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, $request->imageFile->getClientOriginalName(), 'public');
 
         DB::table('musics')->insert([
             'year'=>$request->year,
@@ -47,15 +49,17 @@ class MusicController extends Controller
             'imagepath'=>$pathImage,
             'musicpath'=>$pathMusic,
             'text'=>$request->text,
+            'userId'=>$request->cookie('id')
         ]);
         return redirect('/');
     }
     public function addMusicPage(Request $request){
         $arrayToSend = array();
         $userId = $request->cookie('id');
-        if(!is_null($userId)){
-            $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
+        if(is_null($userId)){
+            return redirect('login');    
         }
+        $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
 
         return view('music/add',$arrayToSend);
     }
@@ -64,7 +68,7 @@ class MusicController extends Controller
     public function deleteMusic($musicId){
         
         
-        $music = DB::table('musics')->get($musicId);
+        $music = DB::table('musics')->find($musicId);
         unlink(storage_path('app/public/'.$music->imagepath));
         unlink(storage_path('app/public/'.$music->musicpath));
 
@@ -77,16 +81,26 @@ class MusicController extends Controller
 
         $arrayToSend = array();
         $userId = $request->cookie('id');
-        if(!is_null($userId)){
-            $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
+        if(is_null($userId)){
+            return redirect('login');    
         }
+        $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
 
 
         $text = $request->text;
 
-        $arrayToSend['musicByName'] = DB::table('musics')->where('name','LIKE','%'.$text.'%')->get();
-        $arrayToSend['musicByAuthor'] = DB::table('musics')->where('author','LIKE','%'.$text.'%')->get();
-        $arrayToSend['musicByText'] = DB::table('musics')->where('text','LIKE','%'.$text.'%')->get();
+        $arrayToSend['musicByName'] = DB::table('musics')
+                                                ->where('userId','=',$userId)
+                                                ->where('name','LIKE','%'.$text.'%')
+                                                ->get();
+        $arrayToSend['musicByAuthor'] = DB::table('musics')
+                                                ->where('userId','=',$userId)
+                                                ->where('author','LIKE','%'.$text.'%')
+                                                ->get();
+        $arrayToSend['musicByText'] = DB::table('musics')
+                                                ->where('userId','=',$userId)
+                                                ->where('text','LIKE','%'.$text.'%')
+                                                ->get();
 
         $arrayToSend['searchText'] = $text;
 
@@ -97,18 +111,22 @@ class MusicController extends Controller
     public function editMusic(Request $request){
 
         $music = DB::table('musics')->find($request->id);
+        $music = DB::table('musics')->find($request->id);
         $pathMusic = null;
         $pathImage = null;
+
+
+        $loginUser = DB::table('users')->find($request->cookie('id'))->login;
         if($request->musicFile!='')
         {
             unlink(storage_path('app/public/'.$music->musicpath));
-            $pathMusic = $request->file('musicFile')->storeAs('musics', $request->musicFile->getClientOriginalName(), 'public');
+            $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, $request->musicFile->getClientOriginalName(), 'public');
         }
 
         if($request->imageFile!='')
         {
             unlink(storage_path('app/public/'.$music->imagepath));
-            $pathImage = $request->file('imageFile')->storeAs('images', $request->imageFile->getClientOriginalName(), 'public');
+            $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, $request->imageFile->getClientOriginalName(), 'public');
         }
 
         DB::table('musics')
@@ -120,16 +138,18 @@ class MusicController extends Controller
             'duration' => $request->duration,
             'text' => $request->text,
             'imagepath' => ($pathImage??$music->imagepath),
-            'musicpath' => ($pathMusic??$music->musicpath)
+            'musicpath' => ($pathMusic??$music->musicpath),
+            'userId'=>$request->cookie('id')
         ]);
         return redirect('/');
     }
     public function editMusicPage($musicId,Request $request){
         $arrayToSend = array();
         $userId = $request->cookie('id');
-        if(!is_null($userId)){
-            $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
+        if(is_null($userId)){
+            return redirect('login');    
         }
+        $arrayToSend['profileImg'] = DB::table('users')->find($userId)->imagepath;
 
         $arrayToSend['music'] = DB::table('musics')->find($musicId);
         

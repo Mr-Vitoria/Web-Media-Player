@@ -56,7 +56,7 @@
     </div>
     <div class="form-group">
       <input id="submitBtn" name="saveBtn" type="submit" class="btn btn-secondary btn-purple" value="Сохранить" />
-      <a class="btn btn-secondary btn-purple" href="./index.php">Отменить</a>
+      <a class="btn btn-secondary btn-purple" href="/">Отменить</a>
     </div>
   </form>
 
