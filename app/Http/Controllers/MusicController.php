@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use Storage;
 use Illuminate\Routing\Controller;
+use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicController extends Controller
 {
@@ -41,11 +42,12 @@ class MusicController extends Controller
         $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, $request->musicFile->getClientOriginalName(), 'public');
         $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, $request->imageFile->getClientOriginalName(), 'public');
 
+        $audio = new Mp3Info(storage_path('app/public/'.$pathMusic), true);
         DB::table('musics')->insert([
             'year'=>$request->year,
             'name'=>$request->name,
             'author'=>$request->author,
-            'duration'=>$request->duration,
+            'duration'=>floor($audio->duration / 60).':'.floor($audio->duration % 60),
             'imagepath'=>$pathImage,
             'musicpath'=>$pathMusic,
             'text'=>$request->text,
@@ -129,13 +131,15 @@ class MusicController extends Controller
             $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, $request->imageFile->getClientOriginalName(), 'public');
         }
 
+        $audio = new Mp3Info(storage_path('app/public/'.$pathMusic), true);
+
         DB::table('musics')
         ->where('id', $request->id)
         ->update([
             'year' => $request->year,
             'name' => $request->name,
             'author' => $request->author,
-            'duration' => $request->duration,
+            'duration' => floor($audio->duration / 60).':'.floor($audio->duration % 60),
             'text' => $request->text,
             'imagepath' => ($pathImage??$music->imagepath),
             'musicpath' => ($pathMusic??$music->musicpath),
