@@ -26,8 +26,8 @@
       <textarea class="form-control" id="InputText" name="text" aria-describedby="textHelp">{{$music->text}}</textarea>
     </div>
     <div class="mb-3" id="InputFileDiv" style="display: none">
-      <label for="formFile" class="form-label">Выберите файл с текстом песни</label>
-      <input class="form-control" type="file" id="formFile" name="formFile">
+      <label for="textFile" class="form-label">Выберите файл с текстом песни</label>
+      <input class="form-control" type="file" id="textFile" name="textFile">
     </div>
     <div class="mb-3">
       <label for="InputAuthor" class="form-label">Автор:</label>

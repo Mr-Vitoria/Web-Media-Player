@@ -48,12 +48,15 @@
       <span class="h1">  -  </span>
       <span class="h1">{{$music->name}}</span>
     </div>
+    @if (!is_null($music->text))
+        
     <div class="head">
       <span class="h2">[Текст песни "</span>
       <span class="h2">{{$music->name}}</span>
       <span class="h2">"]</span>
     </div>
      <div class="text">{!!$music->text!!}</div>
+     @endif
   </div>
 </div>
 @stop
