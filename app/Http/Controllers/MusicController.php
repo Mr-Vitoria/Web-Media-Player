@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Storage;
 use Illuminate\Routing\Controller;
 use wapmorgan\Mp3Info\Mp3Info;
@@ -39,10 +40,16 @@ class MusicController extends Controller
     public function addMusic(Request $request){
 
         $loginUser = DB::table('users')->find($request->cookie('id'))->login;
-        $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, $request->musicFile->getClientOriginalName(), 'public');
-        $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, $request->imageFile->getClientOriginalName(), 'public');
+        $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, Str::random().'.'.$request->file('musicFile')->extension(), 'public');
+        $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, Str::random().'.'.$request->file('imageFile')->extension(), 'public');
 
         $audio = new Mp3Info(storage_path('app/public/'.$pathMusic), true);
+
+        $text = $request->text;
+        if(is_null($text)&&!is_null($request->file('textFile'))){
+            $text = $request->file('textFile')->getContent();
+        }
+
         DB::table('musics')->insert([
             'year'=>$request->year,
             'name'=>$request->name,
@@ -50,7 +57,7 @@ class MusicController extends Controller
             'duration'=>floor($audio->duration / 60).':'.floor($audio->duration % 60),
             'imagepath'=>$pathImage,
             'musicpath'=>$pathMusic,
-            'text'=>$request->text,
+            'text'=>$text,
             'userId'=>$request->cookie('id')
         ]);
         return redirect('/');
@@ -114,24 +121,30 @@ class MusicController extends Controller
 
         $music = DB::table('musics')->find($request->id);
         $music = DB::table('musics')->find($request->id);
-        $pathMusic = null;
-        $pathImage = null;
-
+        $pathMusic = $music->musicpath;
+        $pathImage = $music->imagepath;
+        $duration = $music->duration;
+        
+        $text = $request->text;
+        if(is_null($text)&&!is_null($request->file('textFile'))){
+            $text = $request->file('textFile')->getContent();
+        }
 
         $loginUser = DB::table('users')->find($request->cookie('id'))->login;
         if($request->musicFile!='')
         {
             unlink(storage_path('app/public/'.$music->musicpath));
-            $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, $request->musicFile->getClientOriginalName(), 'public');
+            $pathMusic = $request->file('musicFile')->storeAs('musics/'.$loginUser, Str::random().'.'.$request->file('musicFile')->extension(), 'public');
+            $audio = new Mp3Info(storage_path('app/public/'.$pathMusic), true);
+            $duration = floor($audio->duration / 60).':'.floor($audio->duration % 60);
         }
 
         if($request->imageFile!='')
         {
             unlink(storage_path('app/public/'.$music->imagepath));
-            $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, $request->imageFile->getClientOriginalName(), 'public');
+            $pathImage = $request->file('imageFile')->storeAs('images/'.$loginUser, Str::random().'.'.$request->file('imageFile')->extension(), 'public');
         }
 
-        $audio = new Mp3Info(storage_path('app/public/'.$pathMusic), true);
 
         DB::table('musics')
         ->where('id', $request->id)
@@ -139,10 +152,10 @@ class MusicController extends Controller
             'year' => $request->year,
             'name' => $request->name,
             'author' => $request->author,
-            'duration' => floor($audio->duration / 60).':'.floor($audio->duration % 60),
-            'text' => $request->text,
-            'imagepath' => ($pathImage??$music->imagepath),
-            'musicpath' => ($pathMusic??$music->musicpath),
+            'duration' => $duration,
+            'text' => $text,
+            'imagepath' => $pathImage,
+            'musicpath' => $pathMusic,
             'userId'=>$request->cookie('id')
         ]);
         return redirect('/');
