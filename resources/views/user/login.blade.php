@@ -19,7 +19,7 @@
 
             <button type="submit">Войти</button>
             <div class="helpBlock">
-                <span>Впервые здесь? <a href="/login">Зерегистрируйтесь</a></span>
+                <span>Впервые здесь? <a href="/registrate">Зерегистрируйтесь</a></span>
             </div>
         </form>
     </section>

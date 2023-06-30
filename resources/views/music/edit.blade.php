@@ -30,11 +30,6 @@
       <input class="form-control" type="file" id="formFile" name="formFile">
     </div>
     <div class="mb-3">
-      <label for="InputDuration" class="form-label">Продолжительность:</label>
-      <input type="text" class="form-control" name="duration" id="InputDuration" value="{{$music->duration}}" aria-describedby="durationHelp">
-      <div id="durationHelp" class="form-text">Введите длительность песни в формате 00:00</div>
-    </div>
-    <div class="mb-3">
       <label for="InputAuthor" class="form-label">Автор:</label>
       <input type="text" class="form-control" name="author" id="InputAuthor" value="{{$music->author}}" aria-describedby="AuthorHelp">
       <div id="AuthorHelp" class="form-text">Введите автора песни</div>
@@ -56,7 +51,7 @@
     </div>
     <div class="form-group">
       <input id="submitBtn" name="saveBtn" type="submit" class="btn btn-secondary btn-purple" value="Сохранить" />
-      <a class="btn btn-secondary btn-purple" href="./index.php">Отменить</a>
+      <a class="btn btn-secondary btn-purple" href="/">Отменить</a>
     </div>
   </form>
 

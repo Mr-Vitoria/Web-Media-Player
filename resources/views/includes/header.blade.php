@@ -15,7 +15,8 @@
             <form class="form-inline mr-auto" target="_self" method="get" action="/search">
                 <div class="form-group">
                     <label for="search-field">
-                        <i class="fa fa-search text-white"></i>
+                        {{-- <i class="fa fa-search text-white"></i> --}}
+                        <i class="bi bi-search"></i>
                     </label>
                     <input class="form-control search-field" type="search" id="search-field" name="text">
                 </div>
@@ -24,7 +25,7 @@
 
             <div class="profileContainer">
                 @if(empty($profileImg))
-                    <a href="/registrate">Войти в профиль</a>
+                    <a href="/login">Войти в профиль</a>
                 @else
                     <a href="/profile">
                         <img class="profileIcon" src='{{Storage::url($profileImg) }}'/>
