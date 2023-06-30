@@ -1,5 +1,4 @@
 const audioPlayers = document.querySelectorAll('.audio-player');
-
 for (let index = 0; index < audioPlayers.length; index++) {
     
     let playerButton = audioPlayers[index].querySelector('.player-button'),
@@ -64,4 +63,5 @@ function toggleSound () {
 }
 
 soundButton.addEventListener('click', toggleSound);
+
 }
