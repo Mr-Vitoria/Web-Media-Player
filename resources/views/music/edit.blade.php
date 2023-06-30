@@ -42,7 +42,7 @@
     <div class="mb-3">
       <label for="InputImage" class="form-label">Изображение:</label>
       <input type="file" class="form-control" name="imageFile" id="InputImage" value="{{$music->imagepath}}" aria-describedby="ImageHelp">
-      <div id="ImageHelp" class="form-text">Введите url изображения</div>
+      <div id="ImageHelp" class="form-text">Выберите файл с изображением</div>
     </div>
     <div class="mb-3">
       <label for="InputMusic" class="form-label">Песня:</label>
